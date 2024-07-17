@@ -1,9 +1,9 @@
 package com.logistic.model;
 
 import com.logistic.enums.ProductCategory;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "products")
@@ -23,7 +23,8 @@ public class Product {
     private Double price;
 
     @Column(nullable = false)
-    @Type(type = "com.logistic.enums.ProductCategory")
+    @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private ProductCategory category;
 
     public Product() {}
@@ -74,5 +75,4 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
-
 }
